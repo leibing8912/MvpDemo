@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="transparent_70">#b2000000</color>
+    <color name="main_home_text_dark">#333333</color>
+    <color name="main_home_text_gray">#999999</color>
+    <color name="main_home_text_orange">#ffa02c</color>
+    <color name="main_home_text_blue">#50c0e9</color>
+    <color name="main_home_text_deep_dark">#000000</color>
+    <color name="main_home_bg_normal">#ffffff</color>
+    <color name="main_home_bg_pressed">#fbfbfb</color>
+    <color name="main_home_theme_blue">#30C3FF</color>
+</resources>
