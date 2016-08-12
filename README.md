@@ -1,0 +1,2 @@
+# MvpDemo
+一个参考官方mvp分层架构，将view层Activity生命周期映射到Presenter层的demo.
