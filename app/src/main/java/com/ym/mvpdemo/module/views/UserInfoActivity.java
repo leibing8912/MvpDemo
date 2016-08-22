@@ -11,7 +11,8 @@ import com.ym.mvpdemo.R;
 import com.ym.mvpdemo.adapter.ViewpagerAdapter;
 import com.ym.mvpdemo.module.contract.UserInfoContract;
 import com.ym.mvpdemo.module.model.UserInfoModel;
-import com.ym.mvpdemo.module.presenter.ActivityPresenter;
+import com.ym.mvpdemo.module.presenter.LifeCycleActivityPresenter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ import java.util.List;
  * @author: leibing
  * @createTime: 2016/8/11
  */
-public class UserInfoActivity extends AppCompatActivity implements UserInfoContract.View , View.OnClickListener{
+public class UserInfoActivity extends AppCompatActivity implements UserInfoContract.IView, View.OnClickListener{
     private TextView tv_name;
     private TextView tv_age;
     private TextView tv_address;
@@ -29,8 +30,8 @@ public class UserInfoActivity extends AppCompatActivity implements UserInfoContr
     private TextView mainHomeTv;
     private TextView mainCzhTv;
     private TextView mainMeTv;
-    private UserInfoContract.ActivityPresenter presenter;
-    private UserInfoContract.LifeCycle lifeCycle;
+    private UserInfoContract.IActivityPresenter presenter;
+    private UserInfoContract.ILifeCycle ILifeCycle;
     private UserInfoFragment mHomeFragment;
     private UserInfoFragment mCzhFragment;
     private UserInfoFragment mMineFragment;
@@ -60,10 +61,10 @@ public class UserInfoActivity extends AppCompatActivity implements UserInfoContr
         findViewById(R.id.ly_main_czh).setOnClickListener(this);
         findViewById(R.id.ly_main_me).setOnClickListener(this);
 
-        new ActivityPresenter(this);
+        new LifeCycleActivityPresenter(this);
         presenter.start();
         // View映射onCreate生命周期到Presenter
-        lifeCycle.onCreate();
+        ILifeCycle.onCreate();
     }
 
     /**
@@ -162,7 +163,7 @@ public class UserInfoActivity extends AppCompatActivity implements UserInfoContr
     @Override
     protected void onRestart() {
         // View映射onRestart生命周期到Presenter
-        lifeCycle.onRestart();
+        ILifeCycle.onRestart();
         super.onRestart();
     }
 
@@ -170,34 +171,34 @@ public class UserInfoActivity extends AppCompatActivity implements UserInfoContr
     protected void onStart() {
         super.onStart();
         // View映射onStart生命周期到Presenter
-        lifeCycle.onStart();
+        ILifeCycle.onStart();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         // View映射onResume生命周期到Presenter
-        lifeCycle.onResume();
+        ILifeCycle.onResume();
     }
 
     @Override
     protected void onPause() {
         // View映射onPause生命周期到Presenter
-        lifeCycle.onPause();
+        ILifeCycle.onPause();
         super.onPause();
     }
 
     @Override
     protected void onStop() {
         // View映射onStop生命周期到Presenter
-        lifeCycle.onStop();
+        ILifeCycle.onStop();
         super.onStop();
     }
 
     @Override
     protected void onDestroy() {
         // View映射onDestroy生命周期到Presenter
-        lifeCycle.onDestroy();
+        ILifeCycle.onDestroy();
         super.onDestroy();
     }
 
@@ -226,13 +227,12 @@ public class UserInfoActivity extends AppCompatActivity implements UserInfoContr
     }
 
     @Override
-    public void setPresenter(UserInfoContract.ActivityPresenter presenter) {
+    public void setPresenter(UserInfoContract.IActivityPresenter presenter) {
         this.presenter = presenter;
     }
 
-    @Override
-    public void setLifeCycle(UserInfoContract.LifeCycle lifeCycle) {
-        this.lifeCycle = lifeCycle;
+    public void setILifeCycle(UserInfoContract.ILifeCycle ILifeCycle) {
+        this.ILifeCycle = ILifeCycle;
     }
 
     @Override

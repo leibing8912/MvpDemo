@@ -15,14 +15,14 @@ import com.ym.mvpdemo.module.presenter.FragmentPresenter;
 
 /**
  * @className: UserInfoFragment
- * @classDescription: Ui层（Fragment）
+ * @classDescription: Ui层（IFragment）
  * @author: leibing
  * @createTime: 2016/8/11
  */
-public class UserInfoFragment extends Fragment implements UserInfoContract.Fragment{
+public class UserInfoFragment extends Fragment implements UserInfoContract.IFragment {
     public final static String PAGE_INDEX = "page_index";
     private int pageindex;
-    private UserInfoContract.FragmentPresenter presenter;
+    private UserInfoContract.IFragmentPresenter presenter;
     private boolean isVisibleToUser = false;
 
     @Override
@@ -50,7 +50,7 @@ public class UserInfoFragment extends Fragment implements UserInfoContract.Fragm
     }
 
     @Override
-    public void setPresenter(UserInfoContract.FragmentPresenter presenter) {
+    public void setPresenter(UserInfoContract.IFragmentPresenter presenter) {
         this.presenter = presenter;
     }
 
