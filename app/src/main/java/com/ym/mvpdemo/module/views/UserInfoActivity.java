@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.ym.mvpdemo.R;
@@ -12,9 +11,11 @@ import com.ym.mvpdemo.adapter.ViewpagerAdapter;
 import com.ym.mvpdemo.module.contract.UserInfoContract;
 import com.ym.mvpdemo.module.model.UserInfoModel;
 import com.ym.mvpdemo.module.presenter.LifeCycleActivityPresenter;
-
 import java.util.ArrayList;
 import java.util.List;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * @className: UserInfoActivity
@@ -22,14 +23,12 @@ import java.util.List;
  * @author: leibing
  * @createTime: 2016/8/11
  */
-public class UserInfoActivity extends AppCompatActivity implements UserInfoContract.IView, View.OnClickListener{
-    private TextView tv_name;
-    private TextView tv_age;
-    private TextView tv_address;
-    private ViewPager mainPager;
-    private TextView mainHomeTv;
-    private TextView mainCzhTv;
-    private TextView mainMeTv;
+
+public class UserInfoActivity extends AppCompatActivity implements UserInfoContract.IView{
+    public final static int HOME_INDEX = 0;
+    public final static int CZH_INDEX = 1;
+    public final static int ME_INDEX = 2;
+
     private UserInfoContract.IActivityPresenter presenter;
     private UserInfoContract.ILifeCycle ILifeCycle;
     private UserInfoFragment mHomeFragment;
@@ -37,30 +36,26 @@ public class UserInfoActivity extends AppCompatActivity implements UserInfoContr
     private UserInfoFragment mMineFragment;
     private List<Fragment> mFragmentList;
     private List<String> mTitleList;
-    public final static int HOME_INDEX = 0;
-    public final static int CZH_INDEX = 1;
-    public final static int ME_INDEX = 2;
+
+    @BindView(R.id.tv_name) TextView nameTv;
+    @BindView(R.id.tv_age) TextView ageTv;
+    @BindView(R.id.tv_address) TextView addressTv;
+    @BindView(R.id.vpg_main) ViewPager mainPager;
+    @BindView(R.id.tv_main_home) TextView mainHomeTv;
+    @BindView(R.id.tv_main_czh) TextView mainCzhTv;
+    @BindView(R.id.tv_main_me) TextView mainMeTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        tv_name = (TextView) findViewById(R.id.tv_name);
-        tv_age = (TextView) findViewById(R.id.tv_age);
-        tv_address = (TextView) findViewById(R.id.tv_address);
-        mainPager = (ViewPager) findViewById(R.id.vpg_main);
-        mainHomeTv = (TextView) findViewById(R.id.tv_main_home);
-        mainCzhTv = (TextView) findViewById(R.id.tv_main_czh);
-        mainMeTv  = (TextView) findViewById(R.id.tv_main_me);
-
+        // 绑定ButterKnife
+        ButterKnife.bind(this);
+        // 初始化list
         initList();
-
+        // 初始化Fragment
         initFragment();
-
-        findViewById(R.id.ly_main_home).setOnClickListener(this);
-        findViewById(R.id.ly_main_czh).setOnClickListener(this);
-        findViewById(R.id.ly_main_me).setOnClickListener(this);
-
+        // 初始化逻辑
         new LifeCycleActivityPresenter(this);
         presenter.start();
         // View映射onCreate生命周期到Presenter
@@ -215,9 +210,9 @@ public class UserInfoActivity extends AppCompatActivity implements UserInfoContr
     @Override
     public void showUserInfo(UserInfoModel userInfoModel) {
         if (userInfoModel != null) {
-            tv_name.setText(userInfoModel.getName());
-            tv_age.setText(String.valueOf(userInfoModel.getAge()));
-            tv_address.setText(userInfoModel.getAddress());
+            nameTv.setText(userInfoModel.getName());
+            ageTv.setText(String.valueOf(userInfoModel.getAge()));
+            addressTv.setText(userInfoModel.getAddress());
         }
     }
 
@@ -235,20 +230,15 @@ public class UserInfoActivity extends AppCompatActivity implements UserInfoContr
         this.ILifeCycle = ILifeCycle;
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.ly_main_home:
-                mainPager.setCurrentItem(HOME_INDEX, false);
-                break;
-            case R.id.ly_main_czh:
-                mainPager.setCurrentItem(CZH_INDEX, false);
-                break;
-            case R.id.ly_main_me:
-                mainPager.setCurrentItem(ME_INDEX, false);
-                break;
-            default:
-                break;
-        }
+    @OnClick(R.id.ly_main_home) void mainOnClick() {
+        mainPager.setCurrentItem(HOME_INDEX, false);
+    }
+
+    @OnClick(R.id.ly_main_czh) void czhOnClick() {
+        mainPager.setCurrentItem(CZH_INDEX, false);
+    }
+
+    @OnClick(R.id.ly_main_czh) void meOnClick() {
+        mainPager.setCurrentItem(ME_INDEX, false);
     }
 }
