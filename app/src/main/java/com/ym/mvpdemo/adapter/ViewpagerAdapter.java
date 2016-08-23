@@ -13,34 +13,64 @@ import java.util.List;
  *
  */
 public class ViewpagerAdapter extends FragmentPagerAdapter {
-    private List<Fragment> fragmentList;
-    private List<String> titleList;
+    // Fragment列表
+    private List<Fragment> mFragmentList;
+    // 标题列表
+    private List<String> mTitleList;
 
-    public ViewpagerAdapter(FragmentManager fm, List<Fragment> fragmentList, List<String> titleList){
+    /**
+     *
+     * @author leibing
+     * @createTime 2016/08/23
+     * @lastModify 2016/08/23
+     * @param fm Fragment管理器
+     * @param mFragmentList Frament列表
+     * @param mTitleList 标题列表
+     * @return
+     */
+    public ViewpagerAdapter(FragmentManager fm, List<Fragment> mFragmentList, List<String> mTitleList){
          super(fm);
-        this.fragmentList = fragmentList;
-        this.titleList = titleList;
+        this.mFragmentList = mFragmentList;
+        this.mTitleList = mTitleList;
     }
 
     /**
      * 得到每个页面
+     * @author leibing
+     * @createTime 2016/08/23
+     * @lastModify 2016/08/23
+     * @param arg0
+     * @return Fragment
      */
     @Override
     public Fragment getItem(int arg0) {
-        return (fragmentList == null || fragmentList.size() == 0) ? null
-                : fragmentList.get(arg0);
+        return (mFragmentList == null || mFragmentList.size() == 0) ? null
+                : mFragmentList.get(arg0);
     }
 
     /**
      * 每个页面的title
+     * @author leibing
+     * @createTime 2016/08/23
+     * @lastModify 2016/08/23
+     * @param position 页面数
+     * @return CharSequence
      */
     @Override
     public CharSequence getPageTitle(int position) {
-        return (titleList.size() > position) ? titleList.get(position) : "";
+        return (mTitleList.size() > position) ? mTitleList.get(position) : "";
     }
 
+    /**
+     * 获取页面的数量
+     * @author leibing
+     * @createTime 2016/08/23
+     * @lastModify 2016/08/23
+     * @param
+     * @return int
+     */
     @Override
     public int getCount() {
-        return fragmentList == null ? 0 : fragmentList.size();
+        return mFragmentList == null ? 0 : mFragmentList.size();
     }
 }

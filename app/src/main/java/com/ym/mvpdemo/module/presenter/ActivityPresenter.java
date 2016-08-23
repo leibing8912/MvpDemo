@@ -5,16 +5,24 @@ import com.ym.mvpdemo.module.contract.UserInfoContract;
 import com.ym.mvpdemo.module.model.UserInfoModel;
 
 /**
- * @className: LifeCycleActivityPresenter
+ * @className: ActivityPresenter
  * @classDescription: 逻辑层(Activity)
  * @author: leibing
  * @createTime: 2016/8/11
  */
-public class LifeCycleActivityPresenter implements UserInfoContract.IActivityPresenter, UserInfoContract.ILifeCycle {
-
+public class ActivityPresenter implements UserInfoContract.IActivityPresenter, UserInfoContract.ILifeCycle {
+    // View接口
     private UserInfoContract.IView mIView;
 
-    public LifeCycleActivityPresenter(UserInfoContract.IView mIView) {
+    /**
+     * 构造函数
+     * @author leibing
+     * @createTime 2016/08/23
+     * @lastModify 2016/08/23
+     * @param mIView View接口
+     * @return
+     */
+    public ActivityPresenter(UserInfoContract.IView mIView) {
         this.mIView = mIView;
         mIView.setPresenter(this);
         mIView.setILifeCycle(this);

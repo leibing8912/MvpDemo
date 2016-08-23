@@ -1,6 +1,5 @@
 package com.ym.mvpdemo.module.contract;
 
-
 /**
  * @className: IBaseView
  * @classDescription: view接口基类

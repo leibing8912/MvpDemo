@@ -10,7 +10,7 @@ import com.ym.mvpdemo.R;
 import com.ym.mvpdemo.adapter.ViewpagerAdapter;
 import com.ym.mvpdemo.module.contract.UserInfoContract;
 import com.ym.mvpdemo.module.model.UserInfoModel;
-import com.ym.mvpdemo.module.presenter.LifeCycleActivityPresenter;
+import com.ym.mvpdemo.module.presenter.ActivityPresenter;
 import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;
@@ -23,15 +23,14 @@ import butterknife.OnClick;
  * @author: leibing
  * @createTime: 2016/8/11
  */
-
 public class UserInfoActivity extends AppCompatActivity implements UserInfoContract.IView{
     // 切换Tab常量
     public final static int HOME_INDEX = 0;
     public final static int CZH_INDEX = 1;
     public final static int ME_INDEX = 2;
-    // UI回调
+    // Activity逻辑层接口
     private UserInfoContract.IActivityPresenter mIActivityPresenter;
-    // 生命周期回调
+    // 生命周期接口
     private UserInfoContract.ILifeCycle mILifeCycle;
     // Fragment
     private UserInfoFragment mHomeFragment;
@@ -61,7 +60,7 @@ public class UserInfoActivity extends AppCompatActivity implements UserInfoContr
         // 初始化Fragment
         initFragment();
         // 初始化逻辑
-        new LifeCycleActivityPresenter(this);
+        new ActivityPresenter(this);
         mIActivityPresenter.start();
         // View映射onCreate生命周期到Presenter
         mILifeCycle.onCreate();
