@@ -20,15 +20,19 @@ import com.ym.mvpdemo.module.presenter.FragmentPresenter;
  * @createTime: 2016/8/11
  */
 public class UserInfoFragment extends Fragment implements UserInfoContract.IFragment {
+    // 页面常量
     public final static String PAGE_INDEX = "page_index";
-    private int pageindex;
-    private UserInfoContract.IFragmentPresenter presenter;
+    // 页面数字
+    private int pageIndex;
+    // UI回调
+    private UserInfoContract.IFragmentPresenter mIFragmentPresenter;
+    // 判断是否当前Fragment
     private boolean isVisibleToUser = false;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        pageindex = (int) getArguments().getSerializable(PAGE_INDEX) + 1;
+        pageIndex = (int) getArguments().getSerializable(PAGE_INDEX) + 1;
     }
 
     @Nullable
@@ -36,22 +40,22 @@ public class UserInfoFragment extends Fragment implements UserInfoContract.IFrag
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, null);
         TextView fgmTv = (TextView) view.findViewById(R.id.tv_fgm);
-        fgmTv.setText("第"+ pageindex + "页");
+        fgmTv.setText("第"+ pageIndex + "页");
         if (isVisibleToUser) {
             new FragmentPresenter(this);
-            presenter.start();
+            mIFragmentPresenter.start();
         }
         return view;
     }
 
     @Override
     public void showData() {
-        Toast.makeText(getActivity(), "这是第" + pageindex + "个页面", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "这是第" + pageIndex + "个页面", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void setPresenter(UserInfoContract.IFragmentPresenter presenter) {
-        this.presenter = presenter;
+    public void setPresenter(UserInfoContract.IFragmentPresenter mIFragmentPresenter) {
+        this.mIFragmentPresenter = mIFragmentPresenter;
     }
 
     @Override

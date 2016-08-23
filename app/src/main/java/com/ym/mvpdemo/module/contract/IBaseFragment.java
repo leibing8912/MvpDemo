@@ -7,5 +7,5 @@ package com.ym.mvpdemo.module.contract;
  * @createTime: 2016/8/12
  */
 public interface IBaseFragment {
-    void setPresenter(UserInfoContract.IFragmentPresenter presenter);
+    void setPresenter(UserInfoContract.IFragmentPresenter mIFragmentPresenter);
 }

@@ -25,16 +25,21 @@ import butterknife.OnClick;
  */
 
 public class UserInfoActivity extends AppCompatActivity implements UserInfoContract.IView{
+    // 切换Tab常量
     public final static int HOME_INDEX = 0;
     public final static int CZH_INDEX = 1;
     public final static int ME_INDEX = 2;
-
-    private UserInfoContract.IActivityPresenter presenter;
-    private UserInfoContract.ILifeCycle ILifeCycle;
+    // UI回调
+    private UserInfoContract.IActivityPresenter mIActivityPresenter;
+    // 生命周期回调
+    private UserInfoContract.ILifeCycle mILifeCycle;
+    // Fragment
     private UserInfoFragment mHomeFragment;
     private UserInfoFragment mCzhFragment;
     private UserInfoFragment mMineFragment;
+    // Fragement列表
     private List<Fragment> mFragmentList;
+    // 标题列表
     private List<String> mTitleList;
 
     @BindView(R.id.tv_name) TextView nameTv;
@@ -57,9 +62,9 @@ public class UserInfoActivity extends AppCompatActivity implements UserInfoContr
         initFragment();
         // 初始化逻辑
         new LifeCycleActivityPresenter(this);
-        presenter.start();
+        mIActivityPresenter.start();
         // View映射onCreate生命周期到Presenter
-        ILifeCycle.onCreate();
+        mILifeCycle.onCreate();
     }
 
     /**
@@ -158,7 +163,7 @@ public class UserInfoActivity extends AppCompatActivity implements UserInfoContr
     @Override
     protected void onRestart() {
         // View映射onRestart生命周期到Presenter
-        ILifeCycle.onRestart();
+        mILifeCycle.onRestart();
         super.onRestart();
     }
 
@@ -166,34 +171,34 @@ public class UserInfoActivity extends AppCompatActivity implements UserInfoContr
     protected void onStart() {
         super.onStart();
         // View映射onStart生命周期到Presenter
-        ILifeCycle.onStart();
+        mILifeCycle.onStart();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         // View映射onResume生命周期到Presenter
-        ILifeCycle.onResume();
+        mILifeCycle.onResume();
     }
 
     @Override
     protected void onPause() {
         // View映射onPause生命周期到Presenter
-        ILifeCycle.onPause();
+        mILifeCycle.onPause();
         super.onPause();
     }
 
     @Override
     protected void onStop() {
         // View映射onStop生命周期到Presenter
-        ILifeCycle.onStop();
+        mILifeCycle.onStop();
         super.onStop();
     }
 
     @Override
     protected void onDestroy() {
         // View映射onDestroy生命周期到Presenter
-        ILifeCycle.onDestroy();
+        mILifeCycle.onDestroy();
         super.onDestroy();
     }
 
@@ -222,12 +227,12 @@ public class UserInfoActivity extends AppCompatActivity implements UserInfoContr
     }
 
     @Override
-    public void setPresenter(UserInfoContract.IActivityPresenter presenter) {
-        this.presenter = presenter;
+    public void setPresenter(UserInfoContract.IActivityPresenter mIActivityPresenter) {
+        this.mIActivityPresenter = mIActivityPresenter;
     }
 
-    public void setILifeCycle(UserInfoContract.ILifeCycle ILifeCycle) {
-        this.ILifeCycle = ILifeCycle;
+    public void setILifeCycle(UserInfoContract.ILifeCycle mILifeCycle) {
+        this.mILifeCycle = mILifeCycle;
     }
 
     @OnClick(R.id.ly_main_home) void mainOnClick() {

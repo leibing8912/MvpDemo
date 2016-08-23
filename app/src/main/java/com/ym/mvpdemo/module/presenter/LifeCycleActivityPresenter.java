@@ -12,26 +12,26 @@ import com.ym.mvpdemo.module.model.UserInfoModel;
  */
 public class LifeCycleActivityPresenter implements UserInfoContract.IActivityPresenter, UserInfoContract.ILifeCycle {
 
-    private UserInfoContract.IView view;
+    private UserInfoContract.IView mIView;
 
-    public LifeCycleActivityPresenter(UserInfoContract.IView view) {
-        this.view = view;
-        view.setPresenter(this);
-        view.setILifeCycle(this);
+    public LifeCycleActivityPresenter(UserInfoContract.IView mIView) {
+        this.mIView = mIView;
+        mIView.setPresenter(this);
+        mIView.setILifeCycle(this);
     }
 
     @Override
     public void loadUserInfo() {
-        String userId = view.loadUserId();
-        view.showLoading();//接口请求前显示loading
+        String userId = mIView.loadUserId();
+        mIView.showLoading();//接口请求前显示loading
         //这里模拟接口请求回调-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 //模拟接口返回的json，并转换为javaBean
                 UserInfoModel userInfoModel = new UserInfoModel("小宝", 1, "杭州");
-                view.showUserInfo(userInfoModel);
-                view.dismissLoading();
+                mIView.showUserInfo(userInfoModel);
+                mIView.dismissLoading();
             }
         }, 3000);
     }

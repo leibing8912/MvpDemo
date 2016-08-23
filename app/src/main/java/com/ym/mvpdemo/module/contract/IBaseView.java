@@ -8,6 +8,6 @@ package com.ym.mvpdemo.module.contract;
  * @createTime: 2016/8/11
  */
 public interface IBaseView {
-    void setPresenter(UserInfoContract.IActivityPresenter presenter);
-    void setILifeCycle(UserInfoContract.ILifeCycle ILifeCycle);
+    void setPresenter(UserInfoContract.IActivityPresenter mIActivityPresenter);
+    void setILifeCycle(UserInfoContract.ILifeCycle mILifeCycle);
 }

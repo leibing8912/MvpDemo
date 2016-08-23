@@ -10,22 +10,22 @@ import com.ym.mvpdemo.module.contract.UserInfoContract;
  */
 public class FragmentPresenter implements UserInfoContract.IFragmentPresenter {
 
-    private UserInfoContract.IFragment IFragment;
+    private UserInfoContract.IFragment mIFragment;
 
-    public FragmentPresenter(UserInfoContract.IFragment IFragment) {
-        this.IFragment = IFragment;
-        IFragment.setPresenter(this);
+    public FragmentPresenter(UserInfoContract.IFragment mIFragment) {
+        this.mIFragment = mIFragment;
+        mIFragment.setPresenter(this);
     }
 
     @Override
     public void loadData() {
-        System.out.println("ddddddddddddddddddd IFragment loadData");
-        IFragment.showData();
+        System.out.println("ddddddddddddddddddd mIFragment loadData");
+        mIFragment.showData();
     }
 
     @Override
     public void start() {
-        System.out.println("ddddddddddddddddddd IFragment start");
+        System.out.println("ddddddddddddddddddd mIFragment start");
         loadData();
     }
 }
