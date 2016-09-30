@@ -6,6 +6,7 @@ package com.ym.mvpdemo.module.contract;
  * @author: leibing
  * @createTime: 2016/8/12
  */
-public interface IBaseFragment {
-    void setPresenter(UserInfoContract.IFragmentPresenter mIFragmentPresenter);
+public interface IBaseFragment<T> {
+    // 设置逻辑
+    void setPresenter(T mIFragmentPresenter);
 }

@@ -1,45 +1,49 @@
-package com.ym.mvpdemo.module.presenter;
+package com.ym.mvpdemo.module.presenter.userinfo;
 
 import android.os.Handler;
+import com.ym.mvpdemo.module.contract.ILifeCycle;
 import com.ym.mvpdemo.module.contract.UserInfoContract;
 import com.ym.mvpdemo.module.model.UserInfoModel;
 
 /**
- * @className: ActivityPresenter
- * @classDescription: 逻辑层(Activity)
+ * @className: UserInfoActivityPresenter
+ * @classDescription: 用户信息activity逻辑层
  * @author: leibing
  * @createTime: 2016/8/11
  */
-public class ActivityPresenter implements UserInfoContract.IActivityPresenter, UserInfoContract.ILifeCycle {
-    // View接口
-    private UserInfoContract.IView mIView;
+public class UserInfoActivityPresenter implements UserInfoContract.IUserInfoActivityPresenter, ILifeCycle{
+    // 用户信息activity接口
+    private UserInfoContract.IUserInfoActivity mIUserInfoActivity;
 
     /**
      * 构造函数
      * @author leibing
      * @createTime 2016/08/23
      * @lastModify 2016/08/23
-     * @param mIView View接口
+     * @param mIUserInfoActivity 用户信息activity接口
      * @return
      */
-    public ActivityPresenter(UserInfoContract.IView mIView) {
-        this.mIView = mIView;
-        mIView.setPresenter(this);
-        mIView.setILifeCycle(this);
+    public UserInfoActivityPresenter(UserInfoContract.IUserInfoActivity mIUserInfoActivity) {
+        this.mIUserInfoActivity = mIUserInfoActivity;
+        // 设置逻辑
+        mIUserInfoActivity.setPresenter(this);
+        // 设置生命周期
+        mIUserInfoActivity.setILifeCycle(this);
     }
 
     @Override
     public void loadUserInfo() {
-        String userId = mIView.loadUserId();
-        mIView.showLoading();//接口请求前显示loading
+        String userId = mIUserInfoActivity.loadUserId();
+        System.out.println("ddddddddddddddddddddddddddd userId = " + userId);
+        mIUserInfoActivity.showLoading();//接口请求前显示loading
         //这里模拟接口请求回调-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 //模拟接口返回的json，并转换为javaBean
                 UserInfoModel userInfoModel = new UserInfoModel("小宝", 1, "杭州");
-                mIView.showUserInfo(userInfoModel);
-                mIView.dismissLoading();
+                mIUserInfoActivity.showUserInfo(userInfoModel);
+                mIUserInfoActivity.dismissLoading();
             }
         }, 3000);
     }

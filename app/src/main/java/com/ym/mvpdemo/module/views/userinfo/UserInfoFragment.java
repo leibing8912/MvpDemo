@@ -1,4 +1,4 @@
-package com.ym.mvpdemo.module.views;
+package com.ym.mvpdemo.module.views.userinfo;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -11,7 +11,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.ym.mvpdemo.R;
 import com.ym.mvpdemo.module.contract.UserInfoContract;
-import com.ym.mvpdemo.module.presenter.FragmentPresenter;
+import com.ym.mvpdemo.module.presenter.userinfo.UserInfoFragmentPresenter;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * @className: UserInfoFragment
@@ -19,15 +21,18 @@ import com.ym.mvpdemo.module.presenter.FragmentPresenter;
  * @author: leibing
  * @createTime: 2016/8/11
  */
-public class UserInfoFragment extends Fragment implements UserInfoContract.IFragment {
+public class UserInfoFragment extends Fragment implements UserInfoContract.IUserInfoFragment {
     // 页面常量
     public final static String PAGE_INDEX = "page_index";
     // 页面数字
     private int pageIndex;
     // UI回调
-    private UserInfoContract.IFragmentPresenter mIFragmentPresenter;
+    private UserInfoContract.IUserInfoFragmentPresenter mIFragmentPresenter;
     // 判断是否当前Fragment
     private boolean isVisibleToUser = false;
+
+    @BindView(R.id.tv_fgm)
+    TextView fgmTv;
 
     @Override
     public void onAttach(Activity activity) {
@@ -39,10 +44,12 @@ public class UserInfoFragment extends Fragment implements UserInfoContract.IFrag
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, null);
-        TextView fgmTv = (TextView) view.findViewById(R.id.tv_fgm);
+        // 绑定ButterKnife
+        ButterKnife.bind(this, view);
+
         fgmTv.setText("第"+ pageIndex + "页");
         if (isVisibleToUser) {
-            new FragmentPresenter(this);
+            new UserInfoFragmentPresenter(this);
             mIFragmentPresenter.start();
         }
         return view;
@@ -54,7 +61,7 @@ public class UserInfoFragment extends Fragment implements UserInfoContract.IFrag
     }
 
     @Override
-    public void setPresenter(UserInfoContract.IFragmentPresenter mIFragmentPresenter) {
+    public void setPresenter(UserInfoContract.IUserInfoFragmentPresenter mIFragmentPresenter) {
         this.mIFragmentPresenter = mIFragmentPresenter;
     }
 

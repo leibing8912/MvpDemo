@@ -1,4 +1,4 @@
-package com.ym.mvpdemo.module.views;
+package com.ym.mvpdemo.module.views.userinfo;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,9 +8,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.ym.mvpdemo.R;
 import com.ym.mvpdemo.adapter.ViewpagerAdapter;
+import com.ym.mvpdemo.module.contract.ILifeCycle;
 import com.ym.mvpdemo.module.contract.UserInfoContract;
 import com.ym.mvpdemo.module.model.UserInfoModel;
-import com.ym.mvpdemo.module.presenter.ActivityPresenter;
+import com.ym.mvpdemo.module.presenter.userinfo.UserInfoActivityPresenter;
 import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;
@@ -23,15 +24,15 @@ import butterknife.OnClick;
  * @author: leibing
  * @createTime: 2016/8/11
  */
-public class UserInfoActivity extends AppCompatActivity implements UserInfoContract.IView{
+public class UserInfoActivity extends AppCompatActivity implements UserInfoContract.IUserInfoActivity{
     // 切换Tab常量
     public final static int HOME_INDEX = 0;
     public final static int CZH_INDEX = 1;
     public final static int ME_INDEX = 2;
     // Activity逻辑层接口
-    private UserInfoContract.IActivityPresenter mIActivityPresenter;
+    private UserInfoContract.IUserInfoActivityPresenter mIActivityPresenter;
     // 生命周期接口
-    private UserInfoContract.ILifeCycle mILifeCycle;
+    private ILifeCycle mILifeCycle;
     // Fragment
     private UserInfoFragment mHomeFragment;
     private UserInfoFragment mCzhFragment;
@@ -60,7 +61,7 @@ public class UserInfoActivity extends AppCompatActivity implements UserInfoContr
         // 初始化Fragment
         initFragment();
         // 初始化逻辑
-        new ActivityPresenter(this);
+        new UserInfoActivityPresenter(this);
         mIActivityPresenter.start();
         // View映射onCreate生命周期到Presenter
         mILifeCycle.onCreate();
@@ -226,11 +227,11 @@ public class UserInfoActivity extends AppCompatActivity implements UserInfoContr
     }
 
     @Override
-    public void setPresenter(UserInfoContract.IActivityPresenter mIActivityPresenter) {
+    public void setPresenter(UserInfoContract.IUserInfoActivityPresenter mIActivityPresenter) {
         this.mIActivityPresenter = mIActivityPresenter;
     }
 
-    public void setILifeCycle(UserInfoContract.ILifeCycle mILifeCycle) {
+    public void setILifeCycle(ILifeCycle mILifeCycle) {
         this.mILifeCycle = mILifeCycle;
     }
 
@@ -242,7 +243,7 @@ public class UserInfoActivity extends AppCompatActivity implements UserInfoContr
         mainPager.setCurrentItem(CZH_INDEX, false);
     }
 
-    @OnClick(R.id.ly_main_czh) void meOnClick() {
+    @OnClick(R.id.ly_main_me) void meOnClick() {
         mainPager.setCurrentItem(ME_INDEX, false);
     }
 }
