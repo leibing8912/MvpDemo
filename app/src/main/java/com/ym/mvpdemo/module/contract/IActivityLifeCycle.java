@@ -1,12 +1,12 @@
 package com.ym.mvpdemo.module.contract;
 
 /**
- * @className: ILifeCycle
+ * @className: IActivityLifeCycle
  * @classDescription: 生命周期接口（为了实现Activity UI层生命周期映射到逻辑层）
  * @author: leibing
  * @createTime: 2016/8/11
  */
-public interface ILifeCycle {
+public interface IActivityLifeCycle {
     void onCreate();
     void onRestart();
     void onStart();

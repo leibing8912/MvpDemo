@@ -1,7 +1,7 @@
 package com.ym.mvpdemo.module.presenter.userinfo;
 
 import android.os.Handler;
-import com.ym.mvpdemo.module.contract.ILifeCycle;
+import com.ym.mvpdemo.module.contract.IActivityLifeCycle;
 import com.ym.mvpdemo.module.contract.UserInfoContract;
 import com.ym.mvpdemo.module.model.UserInfoModel;
 
@@ -11,7 +11,7 @@ import com.ym.mvpdemo.module.model.UserInfoModel;
  * @author: leibing
  * @createTime: 2016/8/11
  */
-public class UserInfoActivityPresenter implements UserInfoContract.IUserInfoActivityPresenter, ILifeCycle{
+public class UserInfoActivityPresenter implements UserInfoContract.IUserInfoActivityPresenter, IActivityLifeCycle {
     // 用户信息activity接口
     private UserInfoContract.IUserInfoActivity mIUserInfoActivity;
 
